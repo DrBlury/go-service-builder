@@ -1,0 +1,12 @@
+services:
+  app:
+    container_name: go-service-builder-app
+    image: go-service-builder:latest
+    build:
+      context: .
+      dockerfile: ./build/dockerfiles/Dockerfile.app
+    ports:
+      - '8080:8080'
+    env_file:
+      - .env
+    restart: on-failure

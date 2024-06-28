@@ -1,0 +1,25 @@
+---
+version: 3
+
+dotenv: ['.env']
+
+# To run this taskfile, install taskfile using
+# go install github.com/go-task/task/v3/cmd/task@latest
+
+# To run the taskfile, use the following command
+# task <task-name>
+tasks:
+
+  build-image:
+    desc: 'Build the docker image'
+    cmds:
+      - echo "Building the docker image"
+      - docker build -t go-service-builder -f build/dockerfiles/Dockerfile.app .
+    silent: true
+
+  start:
+    desc: 'Run the app and pass the CLI arguments after a -- e.g. task start -- create -n newProject'
+    cmds:
+      - echo "Starting the application."
+      - cd src && go run . {{.CLI_ARGS}}
+    silent: true
